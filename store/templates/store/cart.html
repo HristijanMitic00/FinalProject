@@ -1,0 +1,44 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="box-element">
+              <a class="btn btn-dark" href="{% url 'store' %}">Back to the store</a>
+        </div>
+        <br>
+        <br>
+
+        <table class="table">
+            <tr>
+                <th><h5>Items: <strong>{{order.get_kit_from_cart}}</strong></h5> </th>
+                <th><h5>Total: <strong>${{order.get_total_from_cart}}</strong></h5> </th>
+                <th>
+                    <a style="float:right; margin:5px" class="btn btn-success" href="{% url 'checkout' %}">Checkout</a>
+                </th>
+            </tr>
+        </table>
+
+        <div class="box-element">
+                <div class="cart-row">
+                    <div style="flex:2"></div>
+                    <div style="flex:2">Item</div>
+                    <div style="flex:1">Price</div>
+                    <div style="flex:1"><h5>Quantity</h5></div>
+                    <div style="flex:1" class="text-dark"><h5>Total</h5></div>
+                </div>
+                {% for kit in kits %}
+                <div class="cart-row">
+                    <div style="flex:2"><img class="row-image" src="{{kit.product.image.url}}"></div>
+                    <div style="flex:2">{{kit.product.name}}</div>
+                    <div style="flex:1">${{kit.product.price}}</div>
+                    <div style="flex:1">{{kit.quantity}}</div>
+                    <div style="flex:1" class="text-dark">${{kit.get_total}}</div>
+                </div>
+                {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
